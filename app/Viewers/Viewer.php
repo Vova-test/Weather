@@ -4,8 +4,8 @@ namespace App\Viewers;
 
 trait Viewer
 {
-    public function view($template, $data)
+    public function view($template, $data = [])
     {
-        require TEMPLATE_FOLDER_PATH . "/" . template . ".php";
+        require TEMPLATE_FOLDER_PATH . "/" . $template . ".php";
     }
 }
