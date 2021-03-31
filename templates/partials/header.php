@@ -14,44 +14,53 @@
     .dropdown-menu {
         min-width: 2rem;
     }
+
     .dropdown-item {
         padding: .25rem .75rem;
     }
-    .search-group{
+
+    .search-group {
         min-width: 25rem;
     }
 </style>
 <body>
 <div class="overlay" id="app">
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary"><div class="container">
-        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-            <a class="navbar-brand" href="/">
-                My Weather site
-            </a>
-        </div>
-        <div class="mx-auto order-0">
-            <div class="input-group search-group">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <span class="input-group-text border-0 bg-primary text-light" id="search-addon">
-                                <i class="fa fa-search"></i>
-                            </span>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <div class="container">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <a class="navbar-brand" href="/">
+                    My Weather site
+                </a>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        UA
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">UA</a>
-                        <a class="dropdown-item" href="#">EN</a>
-                        <a class="dropdown-item" href="#">RU</a>
+            <div class="mx-auto order-0">
+                <div class="input-group search-group">
+                    <input type="text" id="search" class="form-control rounded" placeholder="Search"
+                           aria-label="Search" aria-describedby="search-addon"/>
+                    <span class="input-group-text border-0 bg-primary text-light" id="search-addon">
+                                <i class="fa fa-search"></i>
+                    </span>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="cityCase">
+                        <a class="dropdown-item  disabled" href="#">Виберіть місто</a>
                     </div>
-                </li>
-            </ul>
-        </div></div>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" data-value="uk-UA">
+                            UA
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#" data-value="uk-UA">UA</a>
+                            <a class="dropdown-item" href="#" data-value="en-EN">EN</a>
+                            <a class="dropdown-item" href="#" data-value="ru-RU">RU</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
