@@ -6,7 +6,7 @@ function search() {
     let locationType = "locale";
     let name = "getSunV3LocationSearchUrlConfig";
 
-    $('#search').on('input', function() {
+    $('#Search').on('input', function() {
         searchLength = $(this).val().length;
 
         if (searchLength >= length){
@@ -26,9 +26,16 @@ function search() {
                 }]),
                 contentType: "application/json",
                 success: function(data) {
-                    let searchResponse = data.dal[`${name}`][`language:${lenguage};locationType:${locationType};query:${searchValue}`].data.location;
-                    console.log(searchResponse);
-                    $('#cityCase').show();
+                    console.log("data", data);
+                    if (data.dal[`${name}`][`language:${lenguage};locationType:${locationType};query:${searchValue}`].status != '404'){
+                        let cityResponse = data.dal[`${name}`][`language:${lenguage};locationType:${locationType};query:${searchValue}`].data.location;
+
+                        setCityList(cityResponse);
+                    }
+                    /*console.log("dal", data.dal[`${name}`][`language:${lenguage};locationType:${locationType};query:${searchValue}`].status);
+                    let cityResponse = data.dal[`${name}`][`language:${lenguage};locationType:${locationType};query:${searchValue}`].data.location;
+
+                    setCityList(cityResponse);*/
                 },
                 error: function(data) {
                     let errorData = data;
@@ -36,6 +43,27 @@ function search() {
             });
         }
     });
+
+    $('#Search').on('focusout', function() {
+        $(this).val('');
+        $('#cityCase').hide();
+        $('#cityCase').children().slice(1).remove();
+    });
+}
+
+function setCityList(cityData) {
+    $('#cityCase').children().slice(1).remove();
+
+    for (var i in cityData.address) {
+        $('<a/>', {
+            "class": 'dropdown-item city-item',
+            href: "#",
+            id: cityData.placeId[i],
+            text: cityData.address[i]
+        }).appendTo('#cityCase');
+    }
+
+    $('#cityCase').show();
 }
 
 function setLenguage() {

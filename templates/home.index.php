@@ -1,5 +1,5 @@
-<?php require_once(ROOT_PATH."/templates/partials/header.php"); ?>
-<main>
+<?php //require_once(ROOT_PATH."/templates/partials/header.php"); ?>
+<?php /*<main>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-sm-10 col-md-9 col-lg-8 col-xl-6">
@@ -69,6 +69,8 @@
             </div>
         </div>
     </div>
-</main>
-<?php require_once(ROOT_PATH."/templates/partials/footer.php"); ?>
+</main>*/?>
+
+<?php //require_once(ROOT_PATH."/templates/partials/footer.php"); ?>
+<?php echo $data["mainTag"]; ?>
 

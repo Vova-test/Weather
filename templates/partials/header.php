@@ -23,13 +23,12 @@
                 </div>
                 <div class="mx-auto order-0">
                     <div class="input-group search-group">
-                        <input type="text" id="search" class="form-control rounded" placeholder="Search"
-                               aria-label="Search" aria-describedby="search-addon"/>
+                        <input type="search" id="Search" class="form-control rounded" placeholder="Search"/>
                         <span class="input-group-text border-0 bg-nav1 text-light" id="search-addon">
                                     <i class="fa fa-search"></i>
                         </span>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="cityCase">
-                            <a class="dropdown-item  disabled" href="#">Виберіть місто</a>
+                        <div class="dropdown-menu city-menu" aria-labelledby="Search" id="cityCase">
+                            <a class="dropdown-item city-item  disabled" href="#" id="not-city">Виберіть місто</a>
                         </div>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
@@ -43,10 +42,10 @@
                                aria-haspopup="true" aria-expanded="false" data-value="uk-UA">
                                 UA
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-value="uk-UA">UA</a>
-                                <a class="dropdown-item" href="#" data-value="en-EN">EN</a>
-                                <a class="dropdown-item" href="#" data-value="ru-RU">RU</a>
+                            <div class="dropdown-menu language-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item language-item" href="#" data-value="uk-UA">UA</a>
+                                <a class="dropdown-item language-item" href="#" data-value="en-EN">EN</a>
+                                <a class="dropdown-item language-item" href="#" data-value="ru-RU">RU</a>
                             </div>
                         </li>
                     </ul>

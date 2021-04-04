@@ -9,7 +9,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $mainTag = Model::getWeatherPage("today", "uk-UA", "4ba28384e2da53b2861f5b5c70b7332e4ba1dc83e75b948e6fbd2aaceeeceae3");
+        $mainTag = Model::getWeatherPage("today", "uk-UA", "874007233ad152f9a0541234e94fc0722a06a81db728ad9e08be04b58fbe18fa");
 
         $data = ["mainTag" => $mainTag];
 
