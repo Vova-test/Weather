@@ -177,8 +177,46 @@ class Model
         $items = $card->find('div.DailyForecast--DisclosureList--350ZO details');
 
         foreach ($items as $item) {
-            $dayItem = $item->find('div.DaypartDetails--Content--XQooU',0);
-            $nightItem = $item->find('div.DaypartDetails--Content--XQooU', 1);
+            $timesOfDay = $item->find('div.DaypartDetails--Content--XQooU')
+                ->find(' div.DailyContent--DailyContent--rTQY_');
+            $ul = $item->find('div.DaypartDetails--Content--XQooU')
+                ->find('ul');
+
+            $details = [];
+
+            foreach ($timesOfDay as $key => $period){
+                $details[] = [
+                    'timeName' => $period->findOne('h3')
+                        ->plaintext,
+                    'temp' => $period->findOne('span')
+                        ->plaintext,
+                    'skyCode' => $period->findOne('svg')
+                        ->getAttribute('skycode'),
+                    'skyTitle' => $period->findOne('svg title')
+                        ->plaintext,
+                    'precipIcon' => $period->findOne('div.DailyContent--dataPoints--3fymE
+                            div.DailyContent--rainIconBlock--3JIMK svg')
+                        ->getAttribute('name'),
+                    'precipTitle' => $period->findOne('div.DailyContent--dataPoints--3fymE
+                            div.DailyContent--rainIconBlock--3JIMK svg title')
+                        ->plaintext,
+                    'percent' => $period->findOne('div.DailyContent--dataPoints--3fymE span.DailyContent--value--3Xvjn')
+                        ->plaintext,
+                    'windIcon' => $period->findOne('div.DailyContent--dataPoints--3fymE
+                            svg.DailyContent--windIcon--35FOj')
+                        ->getAttribute('name'),
+                    'windTitle' => $period->findOne('div.DailyContent--dataPoints--3fymE
+                            svg.DailyContent--windIcon--35FOj title')
+                        ->plaintext,
+                    'windText' => $period->findOne('div.DailyContent--dataPoints--3fymE
+                            span.Wind--windWrapper--1Va1P')
+                        ->plaintext,
+                    'description' => $period->findOne('p')
+                        ->plaintext,
+                    'other' => $ul[$key]->findOne('ul')
+                        ->plaintext,
+                ];
+            }
 
             $tenDays[] = [
                 'open' => $item->hasAttribute('open'),
@@ -207,77 +245,9 @@ class Model
                     'windText' => $item->findOne('div.DetailsSummary--wind--Cv4BH span')
                                        ->plaintext,
                 ],
-                'details' => [
-                    'day' => [
-                        'timeName' => $dayItem->findOne('h3')
-                                              ->plaintext,
-                        'temp' => $dayItem->findOne('div.DailyContent--ConditionSummary--2vnrT span')
-                                          ->plaintext,
-                        'skyCode' => $dayItem->findOne('div.DailyContent--ConditionSummary--2vnrT svg')
-                                             ->getAttribute('skycode'),
-                        'skyTitle' => $dayItem->findOne('div.DailyContent--ConditionSummary--2vnrT svg title')
-                                              ->plaintext,
-                        'precipIcon' => $dayItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE div.DailyContent--rainIconBlock--3JIMK svg')
-                                                ->getAttribute('name'),
-                        'precipTitle' => $dayItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE div.DailyContent--rainIconBlock--3JIMK svg title')
-                                                 ->plaintext,
-                        'percent' => $dayItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE span.DailyContent--value--3Xvjn')
-                                                 ->plaintext,
-                        'windIcon' => $dayItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE svg.DailyContent--windIcon--35FOj')
-                                              ->getAttribute('name'),
-                        'windTitle' => $dayItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE svg.DailyContent--windIcon--35FOj title')
-                                            ->plaintext,
-                        'windText' => $dayItem->findOne('div.DailyContent--ConditionSummary--2vnrT
-                            div.DailyContent--dataPoints--3fymE span.Wind--windWrapper--1Va1P')
-                                            ->plaintext,
-                        'description' => $dayItem->findOne('p')
-                                                 ->plaintext,
-                        'other' => $dayItem->findOne('ul')
-                            ->plaintext,
-                    ],
-                    'night' => [
-                        'timeName' => $nightItem->findOne('h3')
-                            ->plaintext,
-                        'temp' => $nightItem->findOne('div.DailyContent--ConditionSummary--2vnrT span')
-                            ->plaintext,
-                        'skyCode' => $nightItem->findOne('div.DailyContent--ConditionSummary--2vnrT svg')
-                            ->getAttribute('skycode'),
-                        'skyTitle' => $nightItem->findOne('div.DailyContent--ConditionSummary--2vnrT svg title')
-                            ->plaintext,
-                        'precipIcon' => $nightItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE div.DailyContent--rainIconBlock--3JIMK svg')
-                            ->getAttribute('name'),
-                        'precipTitle' => $nightItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE div.DailyContent--rainIconBlock--3JIMK svg title')
-                            ->plaintext,
-                        'percent' => $nightItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE span.DailyContent--value--3Xvjn')
-                            ->plaintext,
-                        'windIcon' => $nightItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE svg.DailyContent--windIcon--35FOj')
-                            ->getAttribute('name'),
-                        'windTitle' => $nightItem->findOne('div.DailyContent--ConditionSummary--2vnrT 
-                            div.DailyContent--dataPoints--3fymE svg.DailyContent--windIcon--35FOj title')
-                            ->plaintext,
-                        'windText' => $nightItem->findOne('div.DailyContent--ConditionSummary--2vnrT
-                            div.DailyContent--dataPoints--3fymE span.Wind--windWrapper--1Va1P')
-                            ->plaintext,
-                        'description' => $nightItem->findOne('p')
-                            ->plaintext,
-                        'other' => $nightItem->findOne('ul')
-                            ->plaintext,
-                    ],
-
-                ],
+                'details' => $details,
             ];
         }
-        //DailyForecast--DisclosureList--350ZO
-
         return $tenDays;
     }
 }
