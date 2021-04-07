@@ -1,8 +1,9 @@
 <?php
 return [
     "name" => "ru-RU",
-    "project" => "My Weather site",
+    "project" => "Мой сайт погоді",
     "search" => "Поиск по названию или индексу города",
+    "searchMessage" => "Выберите город",
     "today" => "Сегодня",
     "tenday" => "10 дней",
 ];
