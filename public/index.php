@@ -5,6 +5,7 @@ require_once(ROOT_PATH . "/env.php");
 require_once(ROOT_PATH . "/vendor/autoload.php");
 
 define("TEMPLATE_FOLDER_PATH", ROOT_PATH . "/" . TEMPLATE);
+define("LANGUAGE_FOLDER_PATH", ROOT_PATH . "/" . LANGUAGE);
 
 session_start();
 
