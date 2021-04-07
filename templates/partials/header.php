@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $lang['name']; ?>">
 <head>
     <meta charset="UTF-8">
 
@@ -8,8 +8,9 @@
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/weather.css">
+    <link rel="stylesheet" href="/css/weather_.css">
 
-    <title>My Weather site</title>
+    <title><?php echo $lang['project']; ?></title>
 </head>
 <body>
 <div id="app">
@@ -18,17 +19,17 @@
             <div class="container">
                 <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                     <a class="navbar-brand" href="/">
-                        My Weather site
+                        <?php echo $lang['project']; ?>
                     </a>
                 </div>
                 <div class="mx-auto order-0">
                     <div class="input-group search-group">
-                        <input type="search" id="Search" class="form-control rounded" placeholder="Search"/>
+                        <input type="search" id="Search" class="form-control rounded" placeholder="<?php echo $lang['search']; ?>"/>
                         <span class="input-group-text border-0 bg-nav1 text-light" id="search-addon">
                                     <i class="fa fa-search"></i>
                         </span>
-                        <div class="dropdown-menu city-menu" aria-labelledby="Search" id="cityCase">
-                            <a class="dropdown-item city-item  disabled" href="#" id="not-city">Виберіть місто</a>
+                        <div class="dropdown-menu city-menu" aria-labelledby="search" id="cityCase">
+                            <a class="dropdown-item city-item  disabled" href="#" id="not-city"><?php echo $lang['searchMessage']; ?></a>
                         </div>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
@@ -55,10 +56,10 @@
         <div class="navbar-dark bg-nav2">
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="#">Today</a>
+                    <a class="navbar-brand" href="#"><?php echo $lang['today']; ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="#">10 Day</a>
+                    <a class="navbar-brand" href="#"><?php echo $lang['tenday']; ?></a>
                 </li>
             </ul>
         </div>
