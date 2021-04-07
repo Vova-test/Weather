@@ -44,12 +44,7 @@ class Model
             $pageData = self::getTenDayPage($mainDom);
         }
 
-        //return $pageData;
-
-        echo "<pre>";
-        print_r($pageData);
-        echo "</pre>";
-        die();
+        return $pageData;
     }
 
     public function getToDayPage($mainDom)
@@ -254,20 +249,19 @@ class Model
     public function getOtherInfo($ul)
     {
         $liTegs = $ul->find('li');
-
         $otherInfo = [];
 
         foreach ($liTegs as $li)
         {
             $otherInfo[] = [
-                'iconName' => $li->findOne('svg')
-                                 ->getAttribute('name'),
-                'iconTitle' => $li->findOne('svg title')
-                                 ->plaintext,
-                'name'  => $li->findOne('span.DetailsTable--label--2e7uR')
-                    ->plaintext,
-                'value'  => $li->findOne('span.DetailsTable--value--1F3Ze')
-                    ->plaintext,
+                'name' => $li->findOne('svg')
+                             ->getAttribute('name'),
+                'title' => $li->findOne('svg title')
+                              ->plaintext,
+                'text' => $li->findOne('span.DetailsTable--label--2e7uR')
+                             ->plaintext,
+                'value' => $li->findOne('span.DetailsTable--value--1F3Ze')
+                              ->plaintext,
             ];
         }
 
