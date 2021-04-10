@@ -158,11 +158,11 @@ class Model
         $card = $mainDom->findOne('section.card');
 
         $tenDays = [
-            'mainTitle' => $card->findOne('h1')
-                                ->findOne('text', 0)
+            'mainTitle' => $card->find('h1')
+                                ->find('text', 0)
                                 ->plaintext,
-            'city' => $card->findOne('h1')
-                           ->findOne('text', 2)
+            'city' => $card->find('h1')
+                           ->find('text', 2)
                            ->plaintext,
             'time' => $card->findOne('div.DailyForecast--timestamp--iI022')
                            ->plaintext,
@@ -171,13 +171,17 @@ class Model
         $items = $card->find('div.DailyForecast--DisclosureList--350ZO details');
 
         foreach ($items as $item) {
-            $tenDays[] = [
+            $tenDays['days'][] = [
                 'open' => $item->hasAttribute('open'),
                 'summary' => [
-                    'day' => $item->findOne('summary h2')
-                                  ->plaintext,
-                    'temp' => $item->findOne('div.DetailsSummary--temperature--3FMlw')
+                    'date' => $item->findOne('summary h2')
                                    ->plaintext,
+                    'temp1' => $item->find('div.DetailsSummary--temperature--3FMlw span')
+                                    ->find('text', 0)
+                                    ->plaintext,
+                    'temp2' => $item->find('div.DetailsSummary--temperature--3FMlw span')
+                                    ->find('text', 2)
+                                    ->plaintext,
                     'skyCode' => $item->findOne('div.DetailsSummary--condition--mqdxh svg')
                                       ->getAttribute('skycode'),
                     'skyTitle' => $item->findOne('div.DetailsSummary--condition--mqdxh svg title')
@@ -213,9 +217,13 @@ class Model
 
         foreach ($timesOfDay as $key => $period) {
             $details[] = [
-                'timeName' => $period->findOne('h3')
+                'timeDay' => $period->find('h3')
+                                    ->find('text', 0)
+                                    ->plaintext,
+                'timeName' => $period->find('h3')
+                                     ->find('text', 1)
                                      ->plaintext,
-                'temp' => $period->findOne('span')
+                'temp' => $period->findOne('span.DailyContent--temp--_8DL5')
                                  ->plaintext,
                 'skyCode' => $period->findOne('svg')
                                     ->getAttribute('skycode'),

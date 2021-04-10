@@ -13,7 +13,7 @@
     <title><?php echo $lang['project']; ?></title>
 </head>
 <body>
-<div id="app">
+<div class="overlay" id="app">
     <div class="fixed-top">
         <nav class="navbar navbar-expand-sm navbar-dark bg-nav1">
             <div class="container">
