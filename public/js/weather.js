@@ -68,7 +68,6 @@ function setCityList(cityData) {
 
 function setLenguage() {
     $('#langCase').children('.dropdown-item').on('click', function() {
-        $('#navbarDropdownMenuLink').attr('data-value', $(this).attr('data-value'));
         $('#navbarDropdownMenuLink').text( $(this).text());
     });
 }

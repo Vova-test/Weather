@@ -40,13 +40,14 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" data-value="uk-UA">
-                                UA
+                               aria-haspopup="true" aria-expanded="false">
+                                <?php echo $lang['title']; ?>
                             </a>
-                            <div class="dropdown-menu language-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item language-item" href="#" data-value="uk-UA">UA</a>
-                                <a class="dropdown-item language-item" href="#" data-value="en-EN">EN</a>
-                                <a class="dropdown-item language-item" href="#" data-value="ru-RU">RU</a>
+                            <div id="langCase" class="dropdown-menu language-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <?php foreach (LANGUAGES as $value ): ?>
+                                    <?php if ( $value === $lang['title'] ) continue; ?>
+                                    <a class="dropdown-item language-item" href="#" ><?php echo $value; ?></a>
+                                <?php endforeach; ?>
                             </div>
                         </li>
                     </ul>
