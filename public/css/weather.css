@@ -75,9 +75,6 @@ body .overlay{
 .block-ten {
     background-color: white;
     border-radius: .4em;
-    /*border-color: #6f7585;
-    border-style: solid;
-    border-width: thin;*/
     border: 1px solid #dedede;
 }
 
@@ -100,4 +97,12 @@ body .overlay{
 
 .h2-fs1 {
     font-size: 1em;
+}
+
+ul.hp li {
+    display: inline;
+}
+
+.pg-x-15 {
+    padding: 0 15px;
 }
