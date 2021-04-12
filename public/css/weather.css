@@ -1,4 +1,4 @@
-body .overlay{
+body {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -7,6 +7,7 @@ body .overlay{
     background-color: #69a9bf;
     background-image: linear-gradient(#69a9bf,#a3d4dd);
     background-size: cover;
+    background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -105,4 +106,61 @@ ul.hp li {
 
 .pg-x-15 {
     padding: 0 15px;
+}
+
+.pg-15-30 {
+    padding: 15px 30px;
+}
+
+.pg-top-5 {
+    padding-top: 5px;
+}
+
+.small-svg {
+    width: 1.4em;
+    height: 1.4em;
+    fill: #1b4de4;
+}
+.smaller {
+    width: 1.2em;
+    height: 1.2em;
+}
+.centered-text {
+    text-align: center;
+}
+
+.bordered-col {
+    border-radius: 5px;
+    border: 1px solid #d2cdcd;
+}
+
+.bordered-row {
+    border-bottom: 1px solid #d2cdcd;
+}
+
+.bold-text {
+    font-weight: 700;
+    font-size: 1.25em;
+}
+
+.small-text {
+    font-size: .9em;
+}
+
+.smaller-text {
+    font-size: .7em;
+    font-weight: 400;
+}
+
+.marker-up, .marker-down {
+    float: right;
+}
+
+.marker-up svg, .marker-down svg {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.big-temp {
+    font-size: 1.5em;
 }
