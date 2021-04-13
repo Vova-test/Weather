@@ -6,4 +6,8 @@ define("SITE_URL", "http://test2.loc");
 define("TEMPLATE_FOLDER", "templates");
 define("WEATHER_URL", "https://weather.com");
 define("LANGUAGE_FOLDER", "lang");
-define("LANGUAGES", ['UA', 'EN', 'RU']);
+define("LANGUAGES", [
+    'UA' => "uk-UA",
+    'EN' => "en",
+    'RU' => "ru-RU"
+]);
