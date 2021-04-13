@@ -40,7 +40,12 @@ body {
 }
 
 .margin-menu {
-    margin-top: 6.5rem;
+    margin-top: 7em;
+}
+
+.margin-footer {
+    margin-bottom: 2em;
+    visibility: hidden;
 }
 
 .card {
@@ -140,20 +145,22 @@ ul.hp li {
 
 .bold-text {
     font-weight: 700;
-    font-size: 1.25em;
+    font-size: 1em;
 }
 
 .small-text {
     font-size: .9em;
+    font-weight: 400;
 }
 
 .smaller-text {
-    font-size: .7em;
+    font-size: .67em;
     font-weight: 400;
 }
 
 .marker-up, .marker-down {
     float: right;
+    cursor: pointer
 }
 
 .marker-up svg, .marker-down svg {
@@ -162,5 +169,51 @@ ul.hp li {
 }
 
 .big-temp {
-    font-size: 1.5em;
+    font-size: 1.2em;
+}
+
+.details .detail {
+    display: none;
+}
+
+.details .summary {
+    display: block;
+}
+
+.details[open] .summary {
+    display: none;
+}
+
+.details[open] .detail {
+    display: block;
+}
+
+.bordered-top {
+    border-top: 1px solid #d2cdcd;
+}
+
+.hidden-point {
+    visibility: hidden;
+}
+
+.nav .nav-item a {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.nav .nav-item {
+    text-align: center;
+    padding-bottom: .25em;
+    margin: 0 .5em;
+}
+
+.nav .nav-item a.active {
+    color: #fff;
+    border-bottom: .25rem solid transparent;
+    border-bottom-color: #fff;
+}
+
+a.language-item[disabled] {
+    display: none;
 }
