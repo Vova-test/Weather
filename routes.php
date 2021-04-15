@@ -8,7 +8,7 @@ return [
         "controller" => "HomeController",
         "action" => "indexToday"
     ],
-    "/tenDays/index" => [
+    "/tenday/index" => [
         "controller" => "HomeController",
         "action" => "indexTenDays"
     ],

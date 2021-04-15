@@ -1,7 +1,7 @@
 <?php
 return [
     "name" => "uk-UA",
-    "title" => "UA",
+    "title" => "ua",
     "project" => "Мій сайт погоди",
     "search" => "Пошук за назвою або індексом міста",
     "searchMessage" => "Виберіть місто",

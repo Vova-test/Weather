@@ -18,26 +18,35 @@ class HomeController extends Controller
 
         $data = [
             "lang" => $this->lang,
-            "mainTag" => $mainTag
+            "mainTag" => $mainTag,
+            "cityCode" => $cityCode,
+            "modeType" => $modeType
         ];
 
         //return $this->view("home.index", $data);
         return $this->view("tendays.index", $data);
     }
 
-    public function indexToday($lang = "ua", $cityCode = "fde527f4e0d1ea3a8dc3d8aeca0ea8f4a2838337f8f458b7db842ba8c6a68639")
+    public function indexToday($request = null)
     {
+        var_dump($request);die();
         $this->setLanguage();
 
         $mainTag = Model::getWeatherPage("today", $this->lang, $cityCode);
 
-        $data = ["mainTag" => $mainTag];
+        $data = [
+            "lang" => $this->lang,
+            "mainTag" => $mainTag,
+            "cityCode" => $cityCode,
+            "modeType" => $modeType
+        ];
 
         $this->view("today", $data);
     }
 
-    public function indexTenDays($lang = "ua", $cityCode = "fde527f4e0d1ea3a8dc3d8aeca0ea8f4a2838337f8f458b7db842ba8c6a68639")
+    public function indexTenDays($request = null)
     {
+        var_dump($request);die();
         $this->setLanguage();
 
         $mainTag = Model::getWeatherPage("tenday", $this->lang, $cityCode);
@@ -45,7 +54,9 @@ class HomeController extends Controller
 
         $data = [
             "lang" => $this->lang,
-            "mainTag" => $mainTag
+            "mainTag" => $mainTag,
+            "cityCode" => $cityCode,
+            "modeType" => $modeType
         ];
 
         $this->view("ten.days", $data);

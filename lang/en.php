@@ -1,7 +1,7 @@
 <?php
 return [
     "name" => "en",
-    "title" => "EN",
+    "title" => "en",
     "project" => "My Weather Site",
     "search" => "Search city or zip code",
     "searchMessage" => "Select a city",

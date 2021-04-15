@@ -1,7 +1,7 @@
 <?php
 return [
     "name" => "ru-RU",
-    "title" => "RU",
+    "title" => "ru",
     "project" => "Мой сайт погоды",
     "search" => "Поиск по названию или индексу города",
     "searchMessage" => "Выберите город",
