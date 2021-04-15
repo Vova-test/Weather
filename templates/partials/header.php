@@ -23,12 +23,16 @@
                 </div>
                 <div class="mx-auto order-0">
                     <div class="input-group search-group">
-                        <input type="search" id="Search" class="form-control rounded" placeholder="<?php echo $lang['search'];?>"/>
+                        <input type="search" id="Search" class="form-control rounded"
+                               placeholder="<?php echo $lang['search'];?>"/>
+
                         <span class="input-group-text border-0 bg-nav1 text-light" id="search-addon">
                                     <i class="fa fa-search"></i>
                         </span>
                         <div class="dropdown-menu city-menu" aria-labelledby="search" id="cityCase">
-                            <a class="dropdown-item city-item  disabled" href="#" id="not-city"><?php echo $lang['searchMessage'];?></a>
+                            <a class="dropdown-item city-item disabled" href="#" id="not-city">
+                                <?php echo $lang['searchMessage'];?>
+                            </a>
                         </div>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
@@ -38,15 +42,17 @@
                 <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" data-value="<?php echo $lang['name'];?>">
-                                <?php echo $lang['title'];?>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               data-value="<?php echo $lang['title'];?>">
+                                <?php echo mb_strtoupper($lang['title']);?>
                             </a>
-                            <div id="langCase" class="dropdown-menu language-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <?php foreach (LANGUAGES as $key => $value ):?>
+                            <div id="langCase" class="dropdown-menu language-menu"
+                                 aria-labelledby="navbarDropdownMenuLink">
+                                <?php foreach (LANGUAGES as $value ):?>
                                     <a class="dropdown-item language-item" href="#" data-value="<?php echo $value;?>"
-                                        <?php echo $key === $lang['title'] ? " disabled" : "";?>>
-                                        <?php echo $key;?>
+                                        <?php echo $value === $lang['title'] ? " disabled" : "";?>>
+                                        <?php echo mb_strtoupper($value);?>
                                     </a>
                                 <?php endforeach;?>
                             </div>
@@ -56,14 +62,22 @@
             </div>
         </nav>
         <div class="navbar-dark bg-nav2">
-            <ul class="nav justify-content-center">
+            <ul class="nav justify-content-center" id="modeType">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="#" data-value="today"><?php echo $lang['today'];?></a>
+                    <a class="navbar-brand <?php echo $modeType === "today" ? "active" : "";?>"
+                       href="<?php echo '/today/index';?>"
+                       onclick="event.preventDefault();"><?php echo $lang['today'];?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="navbar-brand active" href="#" data-value="tenday"><?php echo $lang['tenday'];?></a>
+                    <a class="navbar-brand <?php echo $modeType === "tenday" ? "active" : "";?>"
+                       href="<?php echo '/tenday/index';?>"
+                       onclick="event.preventDefault();"><?php echo $lang['tenday'];?></a>
                 </li>
             </ul>
         </div>
     </div>
     <div class ="margin-menu"></div>
+    <form id="weatherForm" action="<?php echo '/' . $modeType . '/index';?>" method="POST" style="display: none;">
+        <input type="hidden" name="lang" value="<?php echo $lang['title'];?>">
+        <input type="hidden" name="cityCode" value="<?php echo $cityCode;?>">
+    </form>
