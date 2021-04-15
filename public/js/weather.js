@@ -6,15 +6,16 @@ function search() {
     let locationType = "locale";
     let name = "getSunV3LocationSearchUrlConfig";
     let delay = 500;
+    let langObject;
 
     $('#Search').on('input', function() {
-        searchLength = $(this).val().length;
+        langObject = $(this);
+        searchLength = langObject.val().length;
 
         if (searchLength < length){
             hideCities();
         }
         if (searchLength >= length){
-            searchValue = $(this).val();
             language = $('#navbarDropdownMenuLink').attr('data-value');
 
             clearTimeout($(this).data('timer'));
@@ -22,44 +23,49 @@ function search() {
             $(this).data('timer', setTimeout(function(){
                 $(this).removeData('timer');
 
-                $.ajax({
-                    url: "https://weather.com/api/v1/p/redux-dal",
-                    type: "POST",
-                    dataType: "json",
-                    data: JSON.stringify([{
-                        "name": name,
-                        "params":{
-                            "query":searchValue,
-                            "language":language,
-                            "locationType": locationType
-                        }
-                    }]),
-                    contentType: "application/json",
-                    success: function(data) {
-                        if (typeof(data.dal[`${name}`][`language:${language};locationType:${locationType};query:${searchValue}`]) == "undefined") {
-                            alert("Not Defind!!!");
-                            return;
-                        }
-                        if (data.dal[`${name}`][`language:${language};locationType:${locationType};query:${searchValue}`].status != '200'){
-                            alert(data.dal[`${name}`][`language:${language};locationType:${locationType};query:${searchValue}`].statusText);
-                            return;
-                        }
+                searchValue = langObject.val();
 
-                        let cityResponse = data.dal[`${name}`][`language:${language};locationType:${locationType};query:${searchValue}`].data.location;
-
-                        setCityList(cityResponse);
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                    }
-                });
+                searchRequest(name, searchValue, language, locationType);
             }, delay));
         }
     });
+}
 
-    $('#Search').on('focusout', function() {
-        $(this).val('');
-        hideCities();
+function searchRequest(
+    name,
+    searchValue,
+    language,
+    locationType
+) {
+    let dataMethodKey = `language:${language};locationType:${locationType};query:${searchValue}`;
+
+    $.ajax({
+        url: "https://weather.com/api/v1/p/redux-dal",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify([{
+            "name": name,
+            "params":{
+                "query":searchValue,
+                "language":language,
+                "locationType": locationType
+            }
+        }]),
+        contentType: "application/json",
+        success: function(data) {
+
+            if (data.dal[name][dataMethodKey].status != '200'){
+                alert(data.dal[name][dataMethodKey].statusText);
+                return;
+            }
+
+            let cityResponse = data.dal[name][dataMethodKey].data.location;
+
+            setCityList(cityResponse);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
     });
 }
 
@@ -76,28 +82,83 @@ function setCityList(cityData) {
     }
 
     $('#cityCase').show();
+
+    changeCity();
 }
 
-function clickCity() {
-    //$('#cityCase').
-}
+function changeCity() {
+    let cityCode;
+    let cityCodeInput;
 
-function setLenguage() {
-    $('#langCase').children('.dropdown-item').on('click', function() {
-        $(this).siblings('*[disabled]').removeAttr('disabled');
-        $(this).attr('disabled', true);
+    $('#cityCase').children('.city-item').on('click', function() {
+        event.preventDefault();
 
-        $('#navbarDropdownMenuLink').text($(this).text());
-        $('#navbarDropdownMenuLink').attr('data-value', $(this).attr('data-value'));
+        cityCode = $(this).attr('id');
+        cityCodeInput = $('#weatherForm').find(":input[name='cityCode']");
+
+        if (cityCodeInput.val() != cityCode) {
+            cityCodeInput.val(cityCode);
+
+            $('#weatherForm').submit();
+        }
+
+        hideCities();
     });
 }
 
-function hideCities(){
+function hideCities() {
     $('#cityCase').hide();
-    $('#cityCase').children().slice(1).remove();
+}
+
+function changeLenguage() {
+    let lang;
+    let weatherForm;
+    let langInput;
+    //let text;
+
+    $('#langCase').children('.dropdown-item').on('click', function() {
+        event.preventDefault();
+
+        weatherForm = $('#weatherForm');
+
+        lang = $(this).attr('data-value');
+        langInput = weatherForm.find(":input[name='lang']");find(":input[name='cityCode']")
+
+        langInput.val(lang);
+        $('#weatherForm').submit();
+
+        /*text = $(this).text();
+        lang = $(this).attr('data-value');
+        $(this).siblings('*[disabled]').removeAttr('disabled');
+        $(this).attr('disabled', true);
+        $('#navbarDropdownMenuLink').text(text);
+        $('#navbarDropdownMenuLink').attr('data-value', lang);*/
+
+    });
+}
+
+function cleanSearchList() {
+    $('#Search').on('focusout', function() {
+        $(this).val('');
+
+        setTimeout(function(){
+            hideCities();
+        },100);
+    });
+}
+
+function changeMode() {
+    $('#modeType').find('a.navbar-brand').not('.active').on('click', function() {
+        let weatherForm = $('#weatherForm');
+
+        weatherForm.attr('action', $(this).attr('href'));
+        weatherForm.submit();
+    });
 }
 
 $(document).ready(function(){
     search();
-    setLenguage();
+    changeLenguage();
+    cleanSearchList();
+    changeMode();
 });
