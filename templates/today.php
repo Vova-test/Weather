@@ -9,7 +9,6 @@
                             <h3><strong><?php echo $mainTag[0]['city'];?></strong></h3>
                             <h5><?php echo $mainTag[0]['time']; ?></h5>
                         </div>
-
                     </div>
                     <div class="d-flex flex-column temp mb-3">
                         <h2 class="mb-0 font-weight-bold" id="heading"><?php echo $mainTag[0]['temperature'];?> C</h2>
@@ -197,7 +196,6 @@
                                     <span><?php echo $mainTag[2]['items'][1]['text2'];?></span>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-12 col-md-6 bordered-top py-1">
                             <div class="d-flex justify-content-between">
@@ -284,8 +282,4 @@
         </div>
     </div>
 </main>
-
 <?php require_once(ROOT_PATH."/templates/partials/footer.php");?>
-<pre>
-    <?php print_r($mainTag);?>
-</pre>
