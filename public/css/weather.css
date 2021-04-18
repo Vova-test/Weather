@@ -50,14 +50,19 @@ body {
 
 .card {
     background-color: #ffffff;
-    border-radius: 50px;
+    border-radius: 30px;
     color: #6f707d;
     font-family: 'Marcellus', serif
 }
 
 #heading {
-    font-size: 55px;
+    font-size: 8em;
     color: #2b304d
+}
+
+.heading {
+    color: #2b354d;
+    font-size: 4em;
 }
 
 .temp {
@@ -67,7 +72,7 @@ body {
 .temp-details>p>span,
 .grey {
     color: #a3acc1;
-    font-size: 12px
+    font-size: 2em;
 }
 
 .fa {
@@ -130,6 +135,13 @@ ul.hp li {
     width: 1.2em;
     height: 1.2em;
 }
+
+.svg {
+    width: 5em;
+    height: 5em;
+    fill: #767982;
+}
+
 .centered-text {
     text-align: center;
 }
@@ -154,7 +166,7 @@ ul.hp li {
 }
 
 .smaller-text {
-    font-size: .67em;
+    font-size: .67em !important;
     font-weight: 400;
 }
 
@@ -216,4 +228,17 @@ ul.hp li {
 
 a.language-item[disabled] {
     display: none;
+}
+
+span.big-blue {
+    color: #1b4de4;
+    font-size: 1.2em;
+}
+
+div.active>*  {
+    font-weight: 700;
+}
+
+span.biger-text {
+    font-size: 1.1em;
 }
