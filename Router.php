@@ -29,6 +29,6 @@ class Router
 
         $controllerName = 'App\\Controllers\\' . $this->routes[$query]["controller"];
         $controllerObj = new $controllerName();
-        $controllerObj->{$this->routes[$query]["action"]}($_REQUEST);
+        $controllerObj->{$this->routes[$query]["action"]}($_POST);
     }
 }
