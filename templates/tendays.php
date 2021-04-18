@@ -48,7 +48,13 @@
                                         </div>
                                         <div class="col-4 px-1 my-auto d-none d-md-block">
                                             <span>
-                                                <strong>Icon</strong>
+                                                <svg class="svg-8 mr-1">
+                                                    <?php if ($key == 0 && !isset($day['details'][1])):?>
+                                                        <use xlink:href="/svg/sprite.svg#moon-50"></use>
+                                                    <?php else:?>
+                                                        <use xlink:href="/svg/sprite.svg#sun"></use>
+                                                    <?php endif;?>
+                                                </svg>
                                                 <span class="small-text">
                                                     <?php echo $day['summary']['text']; ?>
                                                 </span>
@@ -94,7 +100,7 @@
                                                 <div class="row">
                                                     <div  class="col-6">
                                                         <div class="row">
-                                                            <div  class="col-6">
+                                                            <div  class="col-2">
                                                                 <h2>
                                                                     <strong class="big-temp">
                                                                         <?php echo $day['details'][0]['temp']; ?>
@@ -102,9 +108,9 @@
                                                                 </h2>
                                                             </div>
                                                             <div  class="col-6">
-                                                                <h2>
-                                                                    Icon
-                                                                </h2>
+                                                                <svg class="svg-3">
+                                                                    <use xlink:href="/svg/sprite.svg#moon-50"></use>
+                                                                </svg>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -210,10 +216,10 @@
                                                                     </strong>
                                                                 </h2>
                                                             </div>
-                                                            <div  class="col-6">
-                                                                <h2>
-                                                                    Icon
-                                                                </h2>
+                                                            <div  class="col-6 p-0">
+                                                                <svg class="svg-3">
+                                                                    <use xlink:href="/svg/sprite.svg#sun"></use>
+                                                                </svg>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -314,17 +320,17 @@
                                                 <div class="row">
                                                     <div  class="col-6">
                                                         <div class="row">
-                                                            <div  class="col-6">
+                                                            <div  class="col-4">
                                                                 <h2>
                                                                     <strong class="big-temp">
                                                                         <?php echo $day['details'][1]['temp']; ?>
                                                                     </strong>
                                                                 </h2>
                                                             </div>
-                                                            <div  class="col-6">
-                                                                <h2>
-                                                                    Icon
-                                                                </h2>
+                                                            <div  class="col-6 p-0">
+                                                                <svg class="svg-3">
+                                                                    <use xlink:href="/svg/sprite.svg#moon-50"></use>
+                                                                </svg>
                                                             </div>
                                                         </div>
                                                     </div>
