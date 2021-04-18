@@ -24,7 +24,6 @@ function search() {
                 $(this).removeData('timer');
 
                 searchValue = langObject.val();
-
                 searchRequest(name, searchValue, language, locationType);
             }, delay));
         }
@@ -114,7 +113,6 @@ function changeLenguage() {
     let lang;
     let weatherForm;
     let langInput;
-    //let text;
 
     $('#langCase').children('.dropdown-item').on('click', function() {
         event.preventDefault();
@@ -126,24 +124,15 @@ function changeLenguage() {
 
         langInput.val(lang);
         $('#weatherForm').submit();
-
-        /*text = $(this).text();
-        lang = $(this).attr('data-value');
-        $(this).siblings('*[disabled]').removeAttr('disabled');
-        $(this).attr('disabled', true);
-        $('#navbarDropdownMenuLink').text(text);
-        $('#navbarDropdownMenuLink').attr('data-value', lang);*/
-
     });
 }
 
 function cleanSearchList() {
     $('#Search').on('focusout', function() {
-        $(this).val('');
-
         setTimeout(function(){
+            $(this).val('');
             hideCities();
-        },100);
+        },500);
     });
 }
 
