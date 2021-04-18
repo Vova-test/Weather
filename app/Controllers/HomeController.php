@@ -2,19 +2,38 @@
 
 namespace App\Controllers;
 
-use App\Models\Model;
+use App\Models\TodayModel;
+use App\Models\TenDayModel;
+//use App\Models\Model;
 
 class HomeController extends Controller
 {
+    private $modeTypes = ['today', 'tenday'];
+    private $modelUrl;
+
     public function index($request = null)
     {
-        $modeType = $request['modeType'] ?? "tenday";//"today";
-        $lang = $request['lang'] ?? "ua";
-        $cityCode = $request['cityCode'] ?? "fde527f4e0d1ea3a8dc3d8aeca0ea8f4a2838337f8f458b7db842ba8c6a68639";
+        if (!$request) {
+            $request = $this->getBaseArray();
+        }
+
+        $modeType = $request['modeType'] ?? $this->modeTypes[0];
+        $lang = $request['lang'];
+        $cityCode = $request['cityCode'];
 
         $this->setLanguage($lang);
 
-        $mainTag = Model::getWeatherPage($modeType, $this->lang['name'], $cityCode);
+        $this->modelUrl = WEATHER_URL . "/" .  $this->lang['name'] . "/weather/today/l/" .  $cityCode;
+
+
+        $tenDayModel = new TodayModel($this->modelUrl);
+
+        $mainTag = $tenDayModel->getTodayArray($modeType, $this->lang['name'], $cityCode);
+
+        if (!is_array($mainTag)) {
+            echo $mainTag;
+            return;
+        }
 
         $data = [
             "lang" => $this->lang,
@@ -23,17 +42,33 @@ class HomeController extends Controller
             "modeType" => $modeType
         ];
 
-        //return $this->view("home.index", $data);
-        return $this->view("tendays.index", $data);
+        return $this->view("today", $data);
     }
 
     public function indexToday($request = null)
     {
-        var_dump($request);die();
-        $this->setLanguage();
+        if (!$request) {
+            $request = $this->getBaseArray();
+        }
 
-        $mainTag = Model::getWeatherPage("today", $this->lang, $cityCode);
+        $modeType = $request['modeType'] ?? $this->modeTypes[0];
+        $lang = $request['lang'];
+        $cityCode = $request['cityCode'];
 
+        $this->setLanguage($lang);
+
+        $this->modelUrl = WEATHER_URL . "/" .  $this->lang['name'] . "/weather/today/l/" .  $cityCode;
+
+
+        $tenDayModel = new TodayModel($this->modelUrl);
+
+        $mainTag = $tenDayModel->getTodayArray($modeType, $this->lang['name'], $cityCode);
+
+        if (!is_array($mainTag)) {
+            echo $mainTag;
+            return;
+        }
+        //var_dump($mainTag);die();
         $data = [
             "lang" => $this->lang,
             "mainTag" => $mainTag,
@@ -46,11 +81,27 @@ class HomeController extends Controller
 
     public function indexTenDays($request = null)
     {
-        var_dump($request);die();
-        $this->setLanguage();
+        if (!$request) {
+            $request = $this->getBaseArray();
+        }
 
-        $mainTag = Model::getWeatherPage("tenday", $this->lang, $cityCode);
-        var_dump($this->lang);die();
+        $modeType = $request['modeType'] ?? $this->modeTypes[1];
+        $lang = $request['lang'];
+        $cityCode = $request['cityCode'];
+
+        $this->setLanguage($lang);
+
+        $this->modelUrl = WEATHER_URL . "/" .  $this->lang['name'] . "/weather/tenday/l/" .  $cityCode;
+
+
+        $tenDayModel = new TenDayModel($this->modelUrl);
+
+        $mainTag = $tenDayModel->getTenDayArray($modeType, $this->lang['name'], $cityCode);
+
+        if (!is_array($mainTag)) {
+            echo $mainTag;
+            return;
+        }
 
         $data = [
             "lang" => $this->lang,
@@ -59,7 +110,16 @@ class HomeController extends Controller
             "modeType" => $modeType
         ];
 
-        $this->view("ten.days", $data);
+        $this->view("tendays", $data);
     }
 
+    public function getBaseArray()
+    {
+        $baseArray = [
+            "lang" => "ua",
+            "cityCode" => "fde527f4e0d1ea3a8dc3d8aeca0ea8f4a2838337f8f458b7db842ba8c6a68639",
+        ];
+
+        return $baseArray;
+    }
 }
