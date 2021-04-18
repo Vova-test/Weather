@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\TodayModel;
 use App\Models\TenDayModel;
-//use App\Models\Model;
 
 class HomeController extends Controller
 {
@@ -13,45 +12,29 @@ class HomeController extends Controller
 
     public function index($request = null)
     {
-        if (!$request) {
-            $request = $this->getBaseArray();
+        $request = $this->getBaseParams();
+
+        if ($request['modeType'] == $this->modeTypes[0])
+        {
+            $path = "today/index";
+        } else {
+            $path = "tenday/index";
         }
 
-        $modeType = $request['modeType'] ?? $this->modeTypes[0];
-        $lang = $request['lang'];
-        $cityCode = $request['cityCode'];
-
-        $this->setLanguage($lang);
-
-        $this->modelUrl = WEATHER_URL . "/" .  $this->lang['name'] . "/weather/today/l/" .  $cityCode;
-
-
-        $tenDayModel = new TodayModel($this->modelUrl);
-
-        $mainTag = $tenDayModel->getTodayArray($modeType, $this->lang['name'], $cityCode);
-
-        if (!is_array($mainTag)) {
-            echo $mainTag;
-            return;
-        }
-
-        $data = [
-            "lang" => $this->lang,
-            "mainTag" => $mainTag,
-            "cityCode" => $cityCode,
-            "modeType" => $modeType
-        ];
-
-        return $this->view("today", $data);
+        $this->redirect($path);
     }
 
     public function indexToday($request = null)
     {
         if (!$request) {
-            $request = $this->getBaseArray();
+            $request = $this->getBaseParams();
         }
 
-        $modeType = $request['modeType'] ?? $this->modeTypes[0];
+        $request['modeType'] = $this->modeTypes[0];
+
+        $this->setCookies( $request);
+
+        $modeType = $request['modeType'];
         $lang = $request['lang'];
         $cityCode = $request['cityCode'];
 
@@ -68,7 +51,7 @@ class HomeController extends Controller
             echo $mainTag;
             return;
         }
-        //var_dump($mainTag);die();
+
         $data = [
             "lang" => $this->lang,
             "mainTag" => $mainTag,
@@ -82,10 +65,14 @@ class HomeController extends Controller
     public function indexTenDays($request = null)
     {
         if (!$request) {
-            $request = $this->getBaseArray();
+            $request = $this->getBaseParams();
         }
 
-        $modeType = $request['modeType'] ?? $this->modeTypes[1];
+        $request['modeType'] = $this->modeTypes[1];
+
+        $this->setCookies( $request);
+
+        $modeType = $request['modeType'];
         $lang = $request['lang'];
         $cityCode = $request['cityCode'];
 
@@ -113,13 +100,21 @@ class HomeController extends Controller
         $this->view("tendays", $data);
     }
 
-    public function getBaseArray()
+    public function getBaseParams()
     {
         $baseArray = [
-            "lang" => "ua",
-            "cityCode" => "fde527f4e0d1ea3a8dc3d8aeca0ea8f4a2838337f8f458b7db842ba8c6a68639",
+            "lang" => isset($_COOKIE['lang']) ? $_COOKIE['lang'] : "ua",
+            "cityCode" => isset($_COOKIE['cityCode']) ? $_COOKIE['cityCode'] : "fde527f4e0d1ea3a8dc3d8aeca0ea8f4a2838337f8f458b7db842ba8c6a68639",
+            "modeType" => isset($_COOKIE['modeType']) ? $_COOKIE['modeType'] : $this->modeTypes[0]
         ];
 
         return $baseArray;
+    }
+
+    public function setCookies($array)
+    {
+        foreach ($array as $key => $value) {
+            setcookie($key, $value, time() + 3600, "/");
+        }
     }
 }

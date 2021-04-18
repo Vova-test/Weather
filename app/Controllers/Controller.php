@@ -8,9 +8,9 @@ class Controller
 {
     use Viewer;
 
-    protected function redirect($controller, $action)
+    protected function redirect($path)
     {
-        header("Location: /" . $controller . "/" . $action . "/");
+        header("Location: /" . $path);
         die;
     }
 
