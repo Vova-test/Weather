@@ -56,7 +56,7 @@ body {
 }
 
 #heading {
-    font-size: 8em;
+    font-size: 6em;
     color: #2b304d
 }
 
@@ -137,10 +137,27 @@ ul.hp li {
 }
 
 .svg {
-    width: 5em;
-    height: 5em;
+    width: 3.5em;
+    height: 3.5em;
     fill: #767982;
 }
+
+.svg-8 {
+    width: 1.5em;
+    height: 1.5em;
+    fill: #515357;
+}
+
+.compass-east {
+    width: 2em;
+    height: 2em;
+    transform: rotate(45deg);
+}
+
+/*svg.half-moon {
+    width: 1em;
+    height: 1em;
+}*/
 
 .centered-text {
     text-align: center;
@@ -181,7 +198,7 @@ ul.hp li {
 }
 
 .big-temp {
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 .details .detail {
